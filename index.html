@@ -1,13 +1,39 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    #tooltip {
+      display: none;
+      width: max-content;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #222;
+      color: white;
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 90%;
+    }
+
+    #arrow {
+      position: absolute;
+      background: #222;
+      width: 8px;
+      height: 8px;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  
+</body>
+
 </html>

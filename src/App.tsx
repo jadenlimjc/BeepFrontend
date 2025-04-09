@@ -1,36 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Autocomplete } from "./components/Autocomplete";
+import { currencies } from "./data/currencies";
 import './App.css'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selected, setSelected] = useState<any | null>(null);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Autocomplete Demo</h1>
+      <Autocomplete
+        label="Async Search"
+        description="With description and custom results display"
+        placeholder="Type to begin searching"
+        options={currencies}
+        value={selected}
+        onChange={(val) => setSelected(val)}
+        renderOption={(opt) => (
+          <div className="flex justify-between">
+            <span>{opt.code}</span>
+            <span className="text-gray-500">{opt.name}</span>
+          </div>
+        )}
+      />
+      <Autocomplete
+        label="Sync Search"
+        description="With default display and search on focus"
+        placeholder="Type to begin searching"
+        options={currencies}
+        value={selected}
+        onChange={(val) => setSelected(val)}
+        renderOption={(opt) => (
+          <div className="flex justify-between">
+            <span>{opt.code}</span>
+            <span className="text-gray-500">{opt.name}</span>
+          </div>
+        )}
+        
+      />
+      <div className="text-gray-700">
+        Selected: {selected ? `${selected.code} - ${selected.name}` : "None"}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

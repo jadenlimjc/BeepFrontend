@@ -14,6 +14,7 @@ function App() {
   const debouncedInput = useDebounce(searchInput, 500);
 
   const [asyncOptions, setAsyncOptions] = useState<typeof currencies>([]);
+  const [loading, setLoading] = useState(false);
 
   // Fetch debounced options
   useEffect(() => {
@@ -22,12 +23,14 @@ function App() {
         `${c.code} ${c.name}`.toLowerCase().includes(debouncedInput.toLowerCase())
       );
       setAsyncOptions(results);
+      setLoading(false);
     };
 
     if (debouncedInput.length > 0) {
       loadOptions();
     } else {
       setAsyncOptions([]);
+      setLoading(false);
     }
   }, [debouncedInput]);
 
@@ -41,9 +44,13 @@ function App() {
         description="With description and custom results display"
         placeholder="Type to begin searching"
         options={debouncedInput ? asyncOptions : []}
+        loading={loading}
         value={selected}
         onChange={(val) => setSelected(val)}
-        onInputChange={(val: string) => setSearchInput(val)}
+        onInputChange={(val: string) => {
+          setSearchInput(val);
+          setLoading(true);
+        }}
         renderOption={(opt) => (
           <div className="flex justify-between">
             <span>{opt.code}</span>
